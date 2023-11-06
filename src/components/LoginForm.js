@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  // eslint-disable-next-line
   const [token, setToken] = useState('');
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -34,6 +36,8 @@ const LoginForm = () => {
         setToken(data.jwt);
         sessionStorage.setItem('token', data.jwt);
         console.log('JWT token:', data.jwt);
+        // Set login success state to true
+        setLoginSuccess(true);
         // You might want to store this token in local storage or state management (Redux, Context API) for further use.
       } else {
         console.error('Authentication failed');
@@ -71,6 +75,8 @@ const LoginForm = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+
+      {loginSuccess && <p>Login successful!</p>}
     </div>
   );
 };
