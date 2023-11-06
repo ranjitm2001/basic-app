@@ -17,7 +17,7 @@ const LogoutPage = () => {
         // Redirect to http://localhost:3000 after successful logout with a query parameter
         window.location.href = 'http://localhost:3000?logout=true&session=cleared';
       } else {
-        setMessage('Error logging out');
+        setMessage('Error logging out -- Simple');
       }
     } catch (error) {
       setMessage('Error occurred during logout');
