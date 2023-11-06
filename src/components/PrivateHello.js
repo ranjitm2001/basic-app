@@ -3,14 +3,13 @@ import React, { useState } from 'react';
 
 const PrivateHello = () => {
   const [response, setResponse] = useState('');
-  console.log(location.search);
-  const params = new URLSearchParams(location.search);
 
-  // You can access specific parameters:
-  console.log(params.get('token'))
-  console.log(params.get('a'))
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get('token');
 
-  sessionStorage.setItem('token', params.get('token'));
+  if (token) {
+    sessionStorage.setItem('token', token);
+  }
 
   const fetchPrivateData = async () => {
     const token = sessionStorage.getItem('token');
@@ -21,11 +20,6 @@ const PrivateHello = () => {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
-            // 'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-            // 'Access-Control-Allow-Methods': 'OPTIONS,GET,PUT,DELETE,POST',
-            // 'Access-Control-Allow-Credentials': true,
-            // 'Access-Control-Allow-Origin': '*',
-            // 'X-Requested-With': '*',
           },
         });
 
