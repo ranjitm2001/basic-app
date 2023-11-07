@@ -3,22 +3,17 @@ import React, { useState } from 'react';
 const LogoutPage = () => {
   const [message, setMessage] = useState('');
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
-      const response = await fetch('http://localhost:8080/saml-logout', {
-        method: 'GET',
-        credentials: 'include'
-      });
+      // Simulate clearing session
+      sessionStorage.clear();
 
-      if (response.ok) {
-        const data = await response.text();
-        setMessage(data);
-        sessionStorage.clear();
+      // Simulate a delay before redirecting after session clearance
+      setTimeout(() => {
+        setMessage('Logged out successfully.');
         // Redirect to http://localhost:3000 after successful logout with a query parameter
         window.location.href = 'http://localhost:3000?logout=true&session=cleared';
-      } else {
-        setMessage('Error logging out -- Simple');
-      }
+      }, 200); // You can adjust the delay time as needed
     } catch (error) {
       setMessage('Error occurred during logout');
       console.error(error);
