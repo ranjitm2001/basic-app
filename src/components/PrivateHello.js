@@ -1,4 +1,3 @@
-// PrivateHello.js
 import React, { useState } from 'react';
 
 const PrivateHello = () => {
@@ -21,6 +20,8 @@ const PrivateHello = () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
           },
+          mode: 'cors', // Ensure CORS mode is explicitly set
+          credentials: 'include', // Include credentials (cookies)
         });
 
         if (result.ok) {
